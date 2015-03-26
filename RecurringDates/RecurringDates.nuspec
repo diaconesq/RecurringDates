@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/diaconesq/RecurringDates/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/diaconesq/RecurringDates/</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/diaconesq/RecurringDates/master/nuget/nugetIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial version.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>date recurrence recurring calendar event schedule</tags>
+  </metadata>
+  <files>
+    <file src="readme.txt" target="" />
+  </files>
+</package>
