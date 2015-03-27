@@ -13,6 +13,14 @@ The main selling points of this library :
 
 The rules work at day/week/month level. There is (currently) no support for rule-based time-of-day (like "every three hours").
 
+##Installing
+
+You can get it on Nuget. In the GUI, search for package '`RecurringDates`'.  
+Or install directly From the Nuget Package Manager console:
+
+```
+PM> Install-Package RecurringDates
+```
 ##Licensing
 
 This library is licensed under a BSD license and therefore explicitely allows commercial use.  
