@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/g4svu8vmli7tfqp0?svg=true)](https://ci.appveyor.com/project/cristian-diaconescu/recurringdates)
+
 # RecurringDates
 
 .NET library for calculating when a given event occurs, based on a programmatic recurring rule.
