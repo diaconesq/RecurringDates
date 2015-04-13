@@ -4,6 +4,15 @@ namespace RecurringDates
 {
     public class DayOfWeekRule : BaseRule
     {
+        public DayOfWeekRule()
+        {
+        }
+
+        public DayOfWeekRule(DayOfWeek dayOfWeek)
+        {
+            DayOfWeek = dayOfWeek;
+        }
+
         public override bool IsMatch(DateTime day)
         {
             return day.DayOfWeek == DayOfWeek;
