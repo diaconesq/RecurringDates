@@ -37,5 +37,10 @@ namespace RecurringDates
         {
             return new MonthsFilterRule { Months = months, ReferencedRule = rule };
         }
+
+        public static DayOfWeekRule EveryWeek(this DayOfWeek dow)
+        {
+            return new DayOfWeekRule(dow);
+        }
     }
 }
