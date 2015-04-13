@@ -12,14 +12,6 @@ namespace RecurringDates
             return this.GetType().Name;
         }
 
-        public virtual IEnumerator<IRule> GetEnumerator()
-        {
-            yield return this;
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
 
         public override string ToString()
         {

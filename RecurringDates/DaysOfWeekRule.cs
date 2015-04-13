@@ -5,7 +5,7 @@ using RecurringDates.Helpers;
 
 namespace RecurringDates
 {
-    public class DaysOfWeekRule : BaseRule
+    public class DaysOfWeekRule : BaseRule, IHasAlternateRules
     {
         private readonly SetUnionRule _rule;
 
@@ -36,9 +36,10 @@ namespace RecurringDates
             return DaysOfWeek.StringJoin(" or ");
         }
 
-        public override IEnumerator<IRule> GetEnumerator()
+        public IEnumerable<IRule> Rules
         {
-            return _rule.GetEnumerator();
+            get { return _rule.Rules; }
+            set { _rule.Rules = value; }
         }
     }
 }

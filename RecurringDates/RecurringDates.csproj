@@ -48,7 +48,6 @@
     <Compile Include="Month.cs" />
     <Compile Include="MonthsRule.cs" />
     <Compile Include="MonthsFilterRule.cs" />
-    <Compile Include="NaryRule.cs" />
     <Compile Include="NotRule.cs" />
     <Compile Include="NthBeforeAfterRule.cs" />
     <Compile Include="NthInMonthRule.cs" />

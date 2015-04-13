@@ -16,23 +16,17 @@ namespace RecurringDates
 
         private SetIntersectionRule CreateIntersectionRule()
         {
-            var intersectRule = new SetIntersectionRule()
-            {
-                Rules = new[]
+            var intersectRule = ReferencedRule.IfAlso(
+                new MonthsRule()
                 {
-                    ReferencedRule,
-                    new MonthsRule()
-                    {
-                        Months = Months
-                    }
-                }
-            };
+                    Months = Months
+                });
+            
             return intersectRule;
         }
 
         public override string GetDescription()
         {
-            //return CreateIntersectionRule().GetDescription();
             return "{0} in {1}".Fmt(ReferencedRule, Months.StringJoin(", "));
         }
     }

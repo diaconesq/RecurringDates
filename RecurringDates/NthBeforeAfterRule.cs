@@ -10,6 +10,7 @@ namespace RecurringDates
         before,
         after
     }
+
     public class NthBeforeAfterRule : UnaryRule
     {
         private const int MaxSearchHorizon = 100; //days
@@ -36,7 +37,13 @@ namespace RecurringDates
             {
                 return false;
             }
-            var searchDays = NthRule.SelectMany(crt => GetCandidateDays(day, crt));
+
+            var ruleWithAlternatives = NthRule as IHasAlternateRules;
+            var nthRules = ruleWithAlternatives != null ? ruleWithAlternatives.Rules : new[] {NthRule};
+            
+            var searchDays = nthRules.SelectMany(crtRule => GetCandidateDays(day, crtRule))
+                .Distinct() // skip duplicate days
+                ;
 
             return searchDays.Any(d => ReferencedRule.IsMatch(d)); //in the search interval, there's a day matching the guiding rule
         }

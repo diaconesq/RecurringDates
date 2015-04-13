@@ -27,7 +27,18 @@ namespace RecurringDates
             }
 
             var daysInMonth = Nth > 0 ? DaysInMonthAscending(day) : DaysInMonthDescending(day);
-            foreach(var subRule in ReferencedRule)
+            var alternateRules = ReferencedRule as IHasAlternateRules;
+            IEnumerable<IRule> rulesThatCanMatch ;
+            if (alternateRules != null)
+            {
+                rulesThatCanMatch = alternateRules.Rules;
+            }
+            else
+            {
+                rulesThatCanMatch = new[] {ReferencedRule};
+            }
+
+            foreach (var subRule in rulesThatCanMatch)
             try
             {
                 var rule = subRule;

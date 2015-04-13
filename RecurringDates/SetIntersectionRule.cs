@@ -1,11 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using RecurringDates.Helpers;
 
 namespace RecurringDates
 {
-    public class SetIntersectionRule : NaryRule
+    public class SetIntersectionRule : BaseRule
     {
+        public SetIntersectionRule()
+        {
+            Rules = Enumerable.Empty<BaseRule>();
+        }
         public override bool IsMatch(DateTime day)
         {
             return Rules.All(r => r.IsMatch(day));
@@ -15,5 +20,7 @@ namespace RecurringDates
         {
             return "(is " + Rules.StringJoin(" and also is ") + ")";
         }
+
+        public IEnumerable<IRule> Rules { get; set; }
     }
 }
