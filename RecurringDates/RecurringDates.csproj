@@ -42,6 +42,7 @@
     <Compile Include="DayOfWeekRule.cs" />
     <Compile Include="DaysOfWeekRule.cs" />
     <Compile Include="EveryDayRule.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="IRule.cs" />
     <Compile Include="Month.cs" />
