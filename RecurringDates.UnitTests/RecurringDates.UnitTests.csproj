@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="DayOfWeekRuleUT.cs" />
     <Compile Include="Helpers\NumberHelpersUT.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="MonthUT.cs" />
+    <Compile Include="NotRuleUT.cs" />
     <Compile Include="NthDayBeforeAfterRuleUT.cs" />
     <Compile Include="NthInMonthRuleUT.cs" />
     <Compile Include="RealWorldRules.cs" />

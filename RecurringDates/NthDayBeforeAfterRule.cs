@@ -42,22 +42,22 @@ namespace RecurringDates
     }
 
     //same result as above using NthBeforeAfterRule
-    public class NthDayBeforeAfterRule2 : UnaryRule
-    {
-        private static readonly EveryDayRule EveryDayRule = new EveryDayRule();
-        public int Nth { get; set; }
+    //public class NthDayBeforeAfterRule2 : UnaryRule
+    //{
+    //    private static readonly EveryDayRule EveryDayRule = new EveryDayRule();
+    //    public int Nth { get; set; }
 
-        public override bool IsMatch(DateTime day)
-        {
-            var shiftRule = new NthBeforeAfterRule()
-            {
-                NthRule = EveryDayRule,
-                Nth = Nth ,
-                ReferencedRule = ReferencedRule
-            };
+    //    public override bool IsMatch(DateTime day)
+    //    {
+    //        var shiftRule = new NthBeforeAfterRule()
+    //        {
+    //            NthRule = EveryDayRule,
+    //            Nth = Nth ,
+    //            ReferencedRule = ReferencedRule
+    //        };
 
-            return shiftRule.IsMatch(day);
-        }
-    }
+    //        return shiftRule.IsMatch(day);
+    //    }
+    //}
 
 }
