@@ -44,9 +44,8 @@ namespace RecurringDates.UnitTests
 
             var mondayAndNextDays = thirdMonday.Or(thuOrFri);
 
-            var date = new DateTime(year, month, day);
-
-            mondayAndNextDays.IsMatch(date).Should().Be(expected);
+            mondayAndNextDays.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
 
         }
 
@@ -57,7 +56,8 @@ namespace RecurringDates.UnitTests
             //every monday
             var rule = new DayOfWeekRule(DayOfWeek.Monday);
 
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 12, 16, true)]
@@ -66,7 +66,8 @@ namespace RecurringDates.UnitTests
         {
             //On the 16th of every month
             var rule = new NthInMonthRule {Nth = 16, ReferencedRule = new EveryDayRule()};
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 31, true)]
@@ -77,7 +78,8 @@ namespace RecurringDates.UnitTests
             //Last Tuesday of the month
             var rule = DayOfWeek.Tuesday.EveryWeek().TheLastOccurenceInTheMonth();
 
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 1, false)]
@@ -87,7 +89,9 @@ namespace RecurringDates.UnitTests
         {
             //1st Saturday of the month
             var rule = DayOfWeek.Saturday.EveryWeek().The1stOccurenceInTheMonth();
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 1, false)]
@@ -99,7 +103,8 @@ namespace RecurringDates.UnitTests
             //First workday of the month
             var rule = new WorkDayRule().The1stOccurenceInTheMonth();
 
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         
@@ -109,14 +114,9 @@ namespace RecurringDates.UnitTests
         public void FirstAnThirdMondayOfMonth(int year, int month, int day, bool expected)
         {
             //First and Third Monday of the month
-            var rule = new SetUnionRule
-            {
-                Rules = new[]
-                {
-                    DayOfWeek.Monday.EveryWeek().The1stOccurenceInTheMonth(),
-                    DayOfWeek.Monday.EveryWeek().The3rdOccurenceInTheMonth(),
-                }
-            };
+            var rule = 
+                    DayOfWeek.Monday.EveryWeek().The1stOccurenceInTheMonth()
+                    .Or(DayOfWeek.Monday.EveryWeek().The3rdOccurenceInTheMonth());
 
             rule.IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
@@ -136,7 +136,8 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = DayOfWeek.Friday.EveryWeek().The1stOccurenceInTheMonth()
             };
 
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 6, true)]
@@ -158,7 +159,8 @@ namespace RecurringDates.UnitTests
                 Months = new[] {Month.Mar, Month.Jun, Month.Sep, Month.Dec,},
                 ReferencedRule = fridayBefore2ndTuesday
             };
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 1, true)]
@@ -169,13 +171,11 @@ namespace RecurringDates.UnitTests
         public void EachSundayExceptTheThird(int year, int month, int day, bool expected)
         {
             //Each Sunday of Month (except the 3rd one)
-            var rule = new SetDifferenceRule()
-            {
-                IncludeRule = DayOfWeek.Sunday.EveryWeek(),
-                ExcludeRule = DayOfWeek.Sunday.EveryWeek().The3rdOccurenceInTheMonth()
-            };
-
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            var rule = DayOfWeek.Sunday.EveryWeek()
+                .Except(DayOfWeek.Sunday.EveryWeek().The3rdOccurenceInTheMonth());
+            
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 1, 19, true)]
