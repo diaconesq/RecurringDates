@@ -28,5 +28,14 @@ namespace RecurringDates
             return new NotRule { ReferencedRule = rule };
         }
 
+        public static NthInMonthRule NthInMonth(this IRule rule, int nthOccurrence)
+        {
+            return new NthInMonthRule {Nth = nthOccurrence, ReferencedRule = rule};
+        }
+
+        public static MonthsFilterRule InMonths(this IRule rule, params Month[] months)
+        {
+            return new MonthsFilterRule { Months = months, ReferencedRule = rule };
+        }
     }
 }
