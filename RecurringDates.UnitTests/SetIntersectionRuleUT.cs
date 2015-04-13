@@ -25,5 +25,17 @@ namespace RecurringDates.UnitTests
 
             andRule.IsMatch(new DateTime()).Should().Be(expected);
         }
+
+        [TestCase(2015, 4, 5, false)]
+        [TestCase(2015, 4, 3, false)]
+        [TestCase(2015, 6, 5, true)]
+        public void The5thOfTheMonthIfItIsAFriday(int year, int month, int day, bool expected)
+        {
+            var rule = new EveryDayRule().TheNthOccurenceInTheMonth(5)
+                .IfAlso(DayOfWeek.Friday.EveryWeek());
+
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
+        }
     }
 }

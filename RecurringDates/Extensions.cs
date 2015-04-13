@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecurringDates
 {
@@ -13,7 +10,7 @@ namespace RecurringDates
             return new SetUnionRule {Rules = new[] {first}.Concat(otherRules)};
         }
 
-        public static SetIntersectionRule And(this IRule first, params IRule[] otherRules)
+        public static SetIntersectionRule IfAlso(this IRule first, params IRule[] otherRules)
         {
             return new SetIntersectionRule { Rules = new[] { first }.Concat(otherRules) };
         }
