@@ -17,11 +17,7 @@ namespace RecurringDates.UnitTests
             var rule = new NthDayBeforeAfterRule()
             {
                 Nth = 3,
-                ReferencedRule = new NthInMonthRule()
-                {
-                    Nth = 28,
-                    ReferencedRule = new EveryDayRule()
-                }
+                ReferencedRule = new EveryDayRule().TheNthOccurenceInTheMonth( 28 )
             };
             var date = new DateTime(year, month, day);
 

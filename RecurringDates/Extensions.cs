@@ -42,5 +42,35 @@ namespace RecurringDates
         {
             return new DayOfWeekRule(dow);
         }
+
+        public static IRule TheNthOccurenceInTheMonth(this IRule rule, int Nth)
+        {
+            return new NthInMonthRule() { Nth = Nth, ReferencedRule = rule };
+        }
+
+        public static IRule The1stOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(1);
+        }
+        public static IRule The2ndOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(2);
+        }
+        public static IRule The3rdOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(3);
+        }
+        public static IRule The4thOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(4);
+        }
+        public static IRule The5thOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(5);
+        }
+        public static IRule TheLastOccurenceInTheMonth(this IRule rule)
+        {
+            return rule.TheNthOccurenceInTheMonth(-1);
+        }
     }
 }

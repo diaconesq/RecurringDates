@@ -17,11 +17,7 @@ namespace RecurringDates.UnitTests
             {
                 Nth = 3,
                 NthRule = new EveryDayRule(),
-                ReferencedRule = new NthInMonthRule()
-                {
-                    Nth = -1,
-                    ReferencedRule = DayOfWeek.Friday.EveryWeek()
-                }
+                ReferencedRule = DayOfWeek.Friday.EveryWeek().TheLastOccurenceInTheMonth()
             };
 
             var date = new DateTime(year, month, day);
@@ -40,11 +36,7 @@ namespace RecurringDates.UnitTests
             {
                 Nth = 2,
                 NthRule = DayOfWeek.Monday.EveryWeek(),
-                ReferencedRule = new NthInMonthRule()
-                {
-                    Nth = 1,
-                    ReferencedRule = DayOfWeek.Friday.EveryWeek()
-                }
+                ReferencedRule = DayOfWeek.Friday.EveryWeek().The1stOccurenceInTheMonth()
             };
 
             var date = new DateTime(year, month, day);
@@ -62,11 +54,7 @@ namespace RecurringDates.UnitTests
             {
                 Nth = 1,
                 NthRule = new EveryDayRule(),
-                ReferencedRule = new NthInMonthRule()
-                {
-                    Nth = -1,
-                    ReferencedRule = new EveryDayRule()
-                }
+                ReferencedRule = new EveryDayRule().TheLastOccurenceInTheMonth()
             };
 
             var date = new DateTime(year, month, day);
@@ -84,11 +72,7 @@ namespace RecurringDates.UnitTests
             {
                 Nth = -1,
                 NthRule = new EveryDayRule(),
-                ReferencedRule = new NthInMonthRule()
-                {
-                    Nth = 15,
-                    ReferencedRule = new EveryDayRule()
-                }
+                ReferencedRule = new EveryDayRule().TheNthOccurenceInTheMonth( 15 )
             };
 
             var date = new DateTime(year, month, day);
@@ -154,7 +138,7 @@ namespace RecurringDates.UnitTests
             {
                 Nth = -1,
                 NthRule = new DaysOfWeekRule(DayOfWeek.Monday, DayOfWeek.Wednesday),
-                ReferencedRule = new NthInMonthRule() { Nth = 2, ReferencedRule = new DaysOfWeekRule(DayOfWeek.Friday)}
+                ReferencedRule = DayOfWeek.Friday.EveryWeek().The2ndOccurenceInTheMonth()
             };
 
             var date = new DateTime(year, month, day);
