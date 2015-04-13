@@ -34,18 +34,10 @@ namespace RecurringDates.UnitTests
             var anyThirdMonday = new NthInMonthRule()
             {
                 Nth = 3,
-                ReferencedRule = new DayOfWeekRule()
-                {
-                    DayOfWeek = DayOfWeek.Monday
-                }
+                ReferencedRule = new DayOfWeekRule(DayOfWeek.Monday)
             };
 
-            var thirdMonday = new MonthsFilterRule()
-            {
-                Months = new[] {Month.Jan, Month.Apr, Month.Jul, Month.Oct, Month.Dec},
-                ReferencedRule = anyThirdMonday
-            };
-
+            var thirdMonday = anyThirdMonday.InMonths(Month.Jan, Month.Apr, Month.Jul, Month.Oct, Month.Dec);
 
             var thuOrFri = new NthBeforeAfterRule()
             {
@@ -54,16 +46,10 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = thirdMonday
             };
 
-            var mondayAndNextDays = new SetUnionRule()
-            {
-                Rules = new IRule[]
-                {
-                    thirdMonday,
-                    thuOrFri
-                }
-            };
+            var mondayAndNextDays = thirdMonday.Or(thuOrFri);
 
             var date = new DateTime(year, month, day);
+
             mondayAndNextDays.IsMatch(date).Should().Be(expected);
 
         }
@@ -73,7 +59,7 @@ namespace RecurringDates.UnitTests
         public void EveryMonday(int year, int month, int day, bool expected)
         {
             //every monday
-            var rule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Monday};
+            var rule = new DayOfWeekRule(DayOfWeek.Monday);
 
             rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
         }
@@ -93,7 +79,7 @@ namespace RecurringDates.UnitTests
         public void LastTuesdayOfMonth(int year, int month, int day, bool expected)
         {
             //Last Tuesday of the month
-            var rule = new NthInMonthRule {Nth = -1, ReferencedRule = new DayOfWeekRule {DayOfWeek = DayOfWeek.Tuesday}};
+            var rule = new NthInMonthRule { Nth = -1, ReferencedRule = DayOfWeek.Tuesday.EveryWeek() };
             rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
         }
 
@@ -103,7 +89,7 @@ namespace RecurringDates.UnitTests
         public void TheFirstSaturdayOfMonth(int year, int month, int day, bool expected)
         {
             //1st Saturday of the month
-            var rule = new NthInMonthRule {Nth = 1, ReferencedRule = new DayOfWeekRule {DayOfWeek = DayOfWeek.Saturday}};
+            var rule = new NthInMonthRule {Nth = 1, ReferencedRule = DayOfWeek.Saturday.EveryWeek() };
             rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
         }
 
@@ -129,11 +115,13 @@ namespace RecurringDates.UnitTests
             {
                 Rules = new[]
                 {
-                    new NthInMonthRule {Nth = 1, ReferencedRule = new DayOfWeekRule {DayOfWeek = DayOfWeek.Monday}},
-                    new NthInMonthRule {Nth = 3, ReferencedRule = new DayOfWeekRule {DayOfWeek = DayOfWeek.Monday}}
+                    new NthInMonthRule {Nth = 1, ReferencedRule = DayOfWeek.Monday.EveryWeek()},
+                    new NthInMonthRule {Nth = 3, ReferencedRule = DayOfWeek.Monday.EveryWeek()}
                 }
             };
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
 
         [TestCase(2015, 3, 2, false)]
@@ -146,12 +134,12 @@ namespace RecurringDates.UnitTests
             var rule = new NthBeforeAfterRule
             {
                 Nth = 2,
-                NthRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Monday},
+                NthRule = DayOfWeek.Monday.EveryWeek(),
                 ReferencedRule =
                     new NthInMonthRule
                     {
                         Nth = 1,
-                        ReferencedRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Friday}
+                        ReferencedRule = DayOfWeek.Friday.EveryWeek()
                     }
             };
             rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
@@ -167,12 +155,12 @@ namespace RecurringDates.UnitTests
             var fridayBefore2ndTuesday = new NthBeforeAfterRule
             {
                 Nth = -1,
-                NthRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Friday},
+                NthRule = DayOfWeek.Friday.EveryWeek(),
                 ReferencedRule =
                     new NthInMonthRule
                     {
                         Nth = 2,
-                        ReferencedRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Tuesday}
+                        ReferencedRule = DayOfWeek.Tuesday.EveryWeek()
                     }
             };
 
@@ -194,12 +182,12 @@ namespace RecurringDates.UnitTests
             //Each Sunday of Month (except the 3rd one)
             var rule = new SetDifferenceRule()
             {
-                IncludeRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Sunday},
+                IncludeRule = DayOfWeek.Sunday.EveryWeek(),
                 ExcludeRule =
                     new NthInMonthRule
                     {
                         Nth = 3,
-                        ReferencedRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Sunday}
+                        ReferencedRule = DayOfWeek.Sunday.EveryWeek()
                     }
             };
             rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
@@ -231,33 +219,31 @@ namespace RecurringDates.UnitTests
             var thirdMonday = new NthInMonthRule
             {
                 Nth = 3,
-                ReferencedRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Monday}
+                ReferencedRule = DayOfWeek.Monday.EveryWeek()
             };
-            var thirdMondayWithMonthsFilter = new MonthsFilterRule()
-            {
-                Months = new[] {Month.Jan, Month.Apr, Month.Jul, Month.Oct, Month.Dec},
-                ReferencedRule = thirdMonday
-            };
+
+            var thirdMondayWithMonthsFilter = thirdMonday.InMonths(Month.Jan, Month.Apr, Month.Jul, Month.Oct, Month.Dec);
 
             var thursdayAfter = new NthBeforeAfterRule()
             {
                 Nth = 1,
-                NthRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Thursday},
+                NthRule = new DayOfWeekRule(DayOfWeek.Thursday),
                 ReferencedRule = thirdMondayWithMonthsFilter
             };
-            var fridayAfter = new NthBeforeAfterRule()
+
+            var fridayAfter = new NthBeforeAfterRule
             {
                 Nth = 1,
-                NthRule = new DayOfWeekRule() {DayOfWeek = DayOfWeek.Friday},
+                NthRule = new DayOfWeekRule(DayOfWeek.Friday),
                 ReferencedRule = thirdMondayWithMonthsFilter
             };
 
-            var rule = new SetUnionRule
-            {
-                Rules = new IRule[] {thirdMondayWithMonthsFilter, thursdayAfter, fridayAfter}
-            };
-            rule.IsMatch(new DateTime(year, month, day)).Should().Be(expected);
+            var rule = thirdMondayWithMonthsFilter
+                .Or(thursdayAfter)
+                .Or(fridayAfter);
 
+            rule.IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
         }
     }
 }

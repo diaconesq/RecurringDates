@@ -20,10 +20,7 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = new NthInMonthRule()
                 {
                     Nth = -1,
-                    ReferencedRule = new DayOfWeekRule()
-                    {
-                        DayOfWeek = DayOfWeek.Friday
-                    }
+                    ReferencedRule = DayOfWeek.Friday.EveryWeek()
                 }
             };
 
@@ -42,17 +39,11 @@ namespace RecurringDates.UnitTests
             var nthRule = new NthBeforeAfterRule()
             {
                 Nth = 2,
-                NthRule = new DayOfWeekRule()
-                {
-                    DayOfWeek = DayOfWeek.Monday
-                },
+                NthRule = DayOfWeek.Monday.EveryWeek(),
                 ReferencedRule = new NthInMonthRule()
                 {
                     Nth = 1,
-                    ReferencedRule = new DayOfWeekRule()
-                    {
-                        DayOfWeek = DayOfWeek.Friday
-                    }
+                    ReferencedRule = DayOfWeek.Friday.EveryWeek()
                 }
             };
 

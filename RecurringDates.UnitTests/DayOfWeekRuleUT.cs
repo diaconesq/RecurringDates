@@ -10,10 +10,7 @@ namespace RecurringDates.UnitTests
         [Test]
         public void Day_ShouldMatch_Monday()
         {
-            var rule = new DayOfWeekRule
-            {
-                DayOfWeek = DayOfWeek.Monday
-            };
+            var rule = new DayOfWeekRule(DayOfWeek.Monday);
             var date = new DateTime(2015, 3, 9);
 
             rule.IsMatch(date).Should().BeTrue();

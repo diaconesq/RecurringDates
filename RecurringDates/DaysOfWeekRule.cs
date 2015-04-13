@@ -20,7 +20,7 @@ namespace RecurringDates
             DaysOfWeek = daysOfWeekArray;
             _rule = new SetUnionRule()
             {
-                Rules = daysOfWeekArray.Select(day => new DayOfWeekRule() {DayOfWeek = day})
+                Rules = daysOfWeekArray.Select(day => new DayOfWeekRule(day))
             };
         }
 
