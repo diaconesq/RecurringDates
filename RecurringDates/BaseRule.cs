@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace RecurringDates
 {
+    [DataContract]
     public abstract class BaseRule : IRule
     {
         public abstract bool IsMatch(DateTime day);
@@ -11,7 +11,6 @@ namespace RecurringDates
         {
             return this.GetType().Name;
         }
-
 
         public override string ToString()
         {
