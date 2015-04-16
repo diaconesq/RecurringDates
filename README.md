@@ -1,4 +1,5 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/g4svu8vmli7tfqp0?svg=true)](https://ci.appveyor.com/project/cristian-diaconescu/recurringdates)
+[![Build status](https://ci.appveyor.com/api/projects/status/g4svu8vmli7tfqp0?svg=true)](https://ci.appveyor.com/project/cristian-diaconescu/recurringdates) 
+[![diaconesq MyGet Build Status](https://www.myget.org/BuildSource/Badge/diaconesq?identifier=767fe9e9-01f3-4d50-92dc-f27300486d6d)](https://www.myget.org/)
 
 # RecurringDates
 
