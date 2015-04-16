@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 using FluentAssertions;
+using RecurringDates.Serialization;
 
 namespace RecurringDates.UnitTests
 {
@@ -22,53 +23,12 @@ namespace RecurringDates.UnitTests
 
             var rule = anyThirdMonday.InMonths(Month.Jan, Month.Apr, Month.Jul, Month.Oct, Month.Dec);
 
+            var serialized = RuleSerializer.Instance.Serialize(rule);
 
-
-            var serialized = Serialize(rule);
-
-            var rehydratedRule = Deserialize(serialized);
+            var rehydratedRule = RuleSerializer.Instance.Deserialize(serialized);
 
             rehydratedRule.Should().NotBeNull();
         }
 
-        private static IRule Deserialize(string serialized)
-        {
-
-            var IRuleTypes = typeof (IRule).Assembly.DefinedTypes
-                .Where(t => typeof (IRule).IsAssignableFrom(t))
-                ;
-
-            DataContractSerializer serializer = new DataContractSerializer(typeof(IRule), IRuleTypes);
-            var xmlReader = XmlReader.Create(new StringReader(serialized));
-            var obj = serializer.ReadObject(xmlReader);
-
-            return (IRule) obj;
-
-            //var deserializer = new XmlSerializer(typeof (IRule));
-            //var sr = new StringReader(serialized);
-
-            //var rehydratedRule = (IRule)deserializer.Deserialize(sr);
-            //return rehydratedRule;
-        }
-
-        private static string Serialize(IRule rule)
-        {
-            var IRuleTypes = typeof (IRule).Assembly.DefinedTypes
-                .Where(t => typeof (IRule).IsAssignableFrom(t))
-                ;
-
-            DataContractSerializer serializer = new DataContractSerializer(typeof(IRule), IRuleTypes);
-            StringWriter sw = new StringWriter();
-            XmlTextWriter xw = new XmlTextWriter(sw);
-            serializer.WriteObject(xw, rule);
-            return sw.ToString();
-
-            //var serializer = new XmlSerializer(rule.GetType());
-            //var sw = new StringWriter();
-            //serializer.Serialize(sw, rule);
-
-            var serialized = sw.ToString();
-            return serialized;
-        }
     }
 }
