@@ -18,7 +18,10 @@ The rules work at day/week/month level. There is (currently) no support for rule
 
 ##Installing
 
-You can get it on Nuget. In the GUI, search for package '`RecurringDates`'.  
+You can get it [on Nuget: RecurringDates](https://www.nuget.org/packages/RecurringDates/). 
+
+Or, in Visual Studio, in the package manager GUI, search for package '`RecurringDates`'.  
+
 Or install directly From the Nuget Package Manager console:
 
 ```
