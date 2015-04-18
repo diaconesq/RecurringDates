@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using NUnit.Framework;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Xml;
 using FluentAssertions;
+using NUnit.Framework;
 using RecurringDates.Serialization;
 
-namespace RecurringDates.UnitTests
+namespace RecurringDates.UnitTests.Serialization
 {
     [TestFixture]
-    public class Serialization
+    public class SerializationUT
     {
         [Test]
         public void AComplexRule_RoundTrips_WhenSerialized()

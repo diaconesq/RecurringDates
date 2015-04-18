@@ -57,12 +57,16 @@
     <Compile Include="DayOfWeekRuleUT.cs" />
     <Compile Include="Helpers\NumberHelpersUT.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
+    <Compile Include="Serialization\SerializeDeserializeProjection.cs" />
+    <Compile Include="TestFramework\IdentityProjection.cs" />
+    <Compile Include="TestFramework\IRuleProjection.cs" />
     <Compile Include="MonthUT.cs" />
     <Compile Include="NotRuleUT.cs" />
     <Compile Include="NthDayBeforeAfterRuleUT.cs" />
     <Compile Include="NthInMonthRuleUT.cs" />
+    <Compile Include="TestFramework\ProjectedRuleTestFixture.cs" />
     <Compile Include="RealWorldRules.cs" />
-    <Compile Include="Serialization.cs" />
+    <Compile Include="Serialization\SerializationUT.cs" />
     <Compile Include="SetDifferenceRuleUT.cs" />
     <Compile Include="SetIntersectionRuleUT.cs" />
     <Compile Include="NthBeforeAfterRuleUT.cs" />
