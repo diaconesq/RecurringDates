@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class RealWorldRules
+    public class RealWorldRules<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
 
         [TestCase(2015, 1, 19, true)]
@@ -44,7 +44,7 @@ namespace RecurringDates.UnitTests
 
             var mondayAndNextDays = thirdMonday.Or(thuOrFri);
 
-            mondayAndNextDays.IsMatch(new DateTime(year, month, day))
+            Project(mondayAndNextDays).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
 
         }
@@ -56,7 +56,7 @@ namespace RecurringDates.UnitTests
             //every monday
             var rule = new DayOfWeekRule(DayOfWeek.Monday);
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -66,7 +66,7 @@ namespace RecurringDates.UnitTests
         {
             //On the 16th of every month
             var rule = new NthInMonthRule {Nth = 16, ReferencedRule = new EveryDayRule()};
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -78,7 +78,7 @@ namespace RecurringDates.UnitTests
             //Last Tuesday of the month
             var rule = DayOfWeek.Tuesday.EveryWeek().TheLastOccurenceInTheMonth();
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -90,7 +90,7 @@ namespace RecurringDates.UnitTests
             //1st Saturday of the month
             var rule = DayOfWeek.Saturday.EveryWeek().The1stOccurenceInTheMonth();
             
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -103,7 +103,7 @@ namespace RecurringDates.UnitTests
             //First workday of the month
             var rule = new WorkDayRule().The1stOccurenceInTheMonth();
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -118,7 +118,7 @@ namespace RecurringDates.UnitTests
                     DayOfWeek.Monday.EveryWeek().The1stOccurenceInTheMonth()
                     .Or(DayOfWeek.Monday.EveryWeek().The3rdOccurenceInTheMonth());
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -136,7 +136,7 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = DayOfWeek.Friday.EveryWeek().The1stOccurenceInTheMonth()
             };
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -159,7 +159,7 @@ namespace RecurringDates.UnitTests
                 Months = new[] {Month.Mar, Month.Jun, Month.Sep, Month.Dec,},
                 ReferencedRule = fridayBefore2ndTuesday
             };
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -174,7 +174,7 @@ namespace RecurringDates.UnitTests
             var rule = DayOfWeek.Sunday.EveryWeek()
                 .Except(DayOfWeek.Sunday.EveryWeek().The3rdOccurenceInTheMonth());
             
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
 
@@ -223,7 +223,7 @@ namespace RecurringDates.UnitTests
                 .Or(thursdayAfter)
                 .Or(fridayAfter);
 
-            rule.IsMatch(new DateTime(year, month, day))
+            Project(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
     }

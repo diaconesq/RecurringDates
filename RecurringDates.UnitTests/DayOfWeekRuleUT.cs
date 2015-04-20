@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace RecurringDates.UnitTests
 {
+    [TestFixture]
     public class DayOfWeekRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
         [Test]
@@ -11,10 +12,7 @@ namespace RecurringDates.UnitTests
         {
             var rule = new DayOfWeekRule(DayOfWeek.Monday);
             var date = new DateTime(2015, 3, 9);
-
-
-            AssertIsMatch(rule, date);
-            //rule.IsMatch(date).Should().BeTrue();
+            Project(rule).IsMatch(date).Should().BeTrue();
         }
 
         [Test]
@@ -23,7 +21,7 @@ namespace RecurringDates.UnitTests
             var rule = DayOfWeek.Monday.EveryWeek();
             var date = new DateTime(2015, 3, 9);
 
-            rule.IsMatch(date).Should().BeTrue();
+            Project(rule).IsMatch(date).Should().BeTrue();
         }
 
     }

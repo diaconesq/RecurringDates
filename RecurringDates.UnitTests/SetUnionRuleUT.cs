@@ -6,9 +6,28 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class SetUnionRuleUT
+    public class SetUnionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
 
+        [TestCase(2015, 3, 31, true)]
+        [TestCase(2015, 3, 30, true)]
+        [TestCase(2015, 3, 1, false)]
+        [TestCase(2015, 4, 1, false)]
+        public void MondayOrTuesday(int year, int month, int day, bool expected)
+        {
+            var rule = DayOfWeek.Monday.EveryWeek()
+                .Or(DayOfWeek.Tuesday.EveryWeek());
+
+            var date = new DateTime(year, month, day);
+
+            Project(rule).IsMatch(date).Should().Be(expected);
+        }
+
+    }
+
+    [TestFixture]
+    public class SetUnionRuleUT
+    {
         [TestCase(true, true, true)]
         [TestCase(true, false, true)]
         [TestCase(false, true, true)]

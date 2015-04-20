@@ -6,9 +6,25 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
+    public class SetDifferenceRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
+    {
+        [TestCase(2015, 4, 3, true)]
+        [TestCase(2015, 4, 10, false)]
+        [TestCase(2015, 4, 17, true)]
+        [TestCase(2015, 4, 24, true)]
+        public void FridaysExceptThe10thOfTheMonth(int year, int month, int day, bool expected)
+        {
+            var rule = DayOfWeek.Friday.EveryWeek()
+                .Except(new EveryDayRule().TheNthOccurenceInTheMonth(10))
+                ;
+            Project(rule).IsMatch(new DateTime(year, month, day))
+                .Should().Be(expected);
+        }
+    }
+
+    [TestFixture]
     public class SetDifferenceRuleUT
     {
-
         [TestCase(true, true, false)]
         [TestCase(true, false, true)]
         [TestCase(false, true, false)]
@@ -21,9 +37,9 @@ namespace RecurringDates.UnitTests
             var rightRule = Substitute.For<IRule>();
             rightRule.IsMatch(new DateTime()).ReturnsForAnyArgs(right);
 
-            var andRule = new SetDifferenceRule() { IncludeRule = leftRule, ExcludeRule = rightRule };
+            var differenceRule = new SetDifferenceRule() {IncludeRule = leftRule, ExcludeRule = rightRule};
 
-            andRule.IsMatch(new DateTime()).Should().Be(expected);
+            differenceRule.IsMatch(new DateTime()).Should().Be(expected);
         }
     }
 }

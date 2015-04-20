@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class NthDayBeforeAfterRuleUT
+    public class NthDayBeforeAfterRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
         [TestCase(2015, 3, 3, true)]
         [TestCase(2015, 3, 2, false)]
@@ -21,7 +21,7 @@ namespace RecurringDates.UnitTests
             };
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
 
         }
     }

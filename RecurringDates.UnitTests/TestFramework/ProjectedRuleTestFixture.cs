@@ -13,7 +13,8 @@ namespace RecurringDates.UnitTests
     /// <typeparam name="T">a type that implements IRuleProjection</typeparam>
     [TestFixture(typeof(IdentityProjection))]
     [TestFixture(typeof(SerializeDeserializeProjection))]
-    public abstract class ProjectedRuleTestFixture<T> where T: IRuleProjection, new()
+    public abstract class ProjectedRuleTestFixture<T> :IRuleProjection
+        where T: IRuleProjection, new()
     {
         private readonly T _projection;
 
@@ -25,16 +26,13 @@ namespace RecurringDates.UnitTests
         private void AssertMatch(IRule rule, DateTime date, bool expectedResult)
         {
             var projectedRule = _projection.Project(rule);
-            projectedRule.IsMatch(date).Should().Be(expectedResult);
+            Project(projectedRule).IsMatch(date).Should().Be(expectedResult);
         }
 
-        public void AssertIsMatch(IRule rule, DateTime date)
+
+        public IRule Project(IRule rule)
         {
-            AssertMatch(rule, date, true); 
-        }
-        public void AssertIsNotMatch(IRule rule, DateTime date)
-        {
-            AssertMatch(rule, date, false);
+            return _projection.Project(rule);
         }
     }
 }

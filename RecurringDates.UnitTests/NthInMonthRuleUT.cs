@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class NthInMonthRuleUT
+    public class NthInMonthRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
         [Test]
         public void NthIsZero_ThrowsException()
@@ -18,7 +18,7 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = Substitute.For<IRule>()
             };
 
-            Action act = () => { rule.IsMatch(new DateTime()); };
+            Action act = () => { Project(rule).IsMatch(new DateTime()); };
 
             act.ShouldThrow<Exception>();
         }
@@ -34,7 +34,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 31, true)]
@@ -47,8 +47,9 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
         }
+
         [TestCase(2015, 3, 31, false)]
         [TestCase(2015, 3, 30, true)]
         [TestCase(2015, 3, 23, false)]
@@ -59,7 +60,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 4, 10, true)]
@@ -75,7 +76,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
         }
 
 
@@ -93,7 +94,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            rule.IsMatch(date).Should().Be(expected);
+            Project(rule).IsMatch(date).Should().Be(expected);
         }
 
     }

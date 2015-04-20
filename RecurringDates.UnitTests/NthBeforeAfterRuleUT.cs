@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class NthBeforeAfterRuleUT
+    public class NthBeforeAfterRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
     {
         [TestCase(2015, 3, 2, true)]
         [TestCase(2015, 3, 1, false)]
@@ -22,7 +22,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 2, false)]
@@ -41,7 +41,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 1, true)]
@@ -59,7 +59,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 14, true)]
@@ -77,7 +77,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 4, true)]
@@ -112,7 +112,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 9, true)]
@@ -127,7 +127,7 @@ namespace RecurringDates.UnitTests
             };
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
 
         }
         [TestCase(2015, 3, 9, true)]
@@ -143,7 +143,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            nthRule.IsMatch(date).Should().Be(expected);
+            Project(nthRule).IsMatch(date).Should().Be(expected);
 
         }
 
