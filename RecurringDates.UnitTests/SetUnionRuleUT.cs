@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace RecurringDates.UnitTests
 {
-    [TestFixture]
     public class SetUnionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
 

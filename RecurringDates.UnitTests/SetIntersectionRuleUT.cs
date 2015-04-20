@@ -27,7 +27,6 @@ namespace RecurringDates.UnitTests
         }
     }
 
-    [TestFixture]
     public class SetIntersectionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
 

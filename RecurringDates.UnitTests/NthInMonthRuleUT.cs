@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace RecurringDates.UnitTests
 {
-    [TestFixture]
     public class NthInMonthRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
         [Test]

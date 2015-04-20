@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace RecurringDates.UnitTests
 {
-    [TestFixture]
     public class SetDifferenceRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
         [TestCase(2015, 4, 3, true)]

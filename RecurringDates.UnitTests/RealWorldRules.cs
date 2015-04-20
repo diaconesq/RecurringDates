@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace RecurringDates.UnitTests
 {
-    [TestFixture]
     public class RealWorldRules<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
 
