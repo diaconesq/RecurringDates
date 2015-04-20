@@ -10,11 +10,11 @@ namespace RecurringDates.UnitTests
     /// The rule is tested both 'as is' and also after a serialize/deserialize roundtrip, 
     /// to make sure the rule is not modified by serialization
     /// </summary>
-    /// <typeparam name="T">a type that implements IRuleProjection</typeparam>
-    [TestFixture(typeof(IdentityProjection))]
-    [TestFixture(typeof(SerializeDeserializeProjection))]
-    public abstract class ProjectedRuleTestFixture<T> :IRuleProjection
-        where T: IRuleProjection, new()
+    /// <typeparam name="T">a type that implements IRuleProcessor</typeparam>
+    [TestFixture(typeof(IdentityProcessor))]
+    [TestFixture(typeof(SerializeDeserializeProcessor))]
+    public abstract class ProjectedRuleTestFixture<T> :IRuleProcessor
+        where T: IRuleProcessor, new()
     {
         private readonly T _projection;
 
@@ -25,14 +25,14 @@ namespace RecurringDates.UnitTests
 
         private void AssertMatch(IRule rule, DateTime date, bool expectedResult)
         {
-            var projectedRule = _projection.Project(rule);
-            Project(projectedRule).IsMatch(date).Should().Be(expectedResult);
+            var projectedRule = _projection.Process(rule);
+            Process(projectedRule).IsMatch(date).Should().Be(expectedResult);
         }
 
 
-        public IRule Project(IRule rule)
+        public IRule Process(IRule rule)
         {
-            return _projection.Project(rule);
+            return _projection.Process(rule);
         }
     }
 }

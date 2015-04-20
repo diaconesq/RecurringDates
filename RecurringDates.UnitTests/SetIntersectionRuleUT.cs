@@ -28,7 +28,7 @@ namespace RecurringDates.UnitTests
     }
 
     [TestFixture]
-    public class SetIntersectionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
+    public class SetIntersectionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
 
         [TestCase(2015, 4, 5, false)]
@@ -39,7 +39,7 @@ namespace RecurringDates.UnitTests
             var rule = new EveryDayRule().TheNthOccurenceInTheMonth(5)
                 .IfAlso(DayOfWeek.Friday.EveryWeek());
 
-            Project(rule).IsMatch(new DateTime(year, month, day))
+            Process(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
     }

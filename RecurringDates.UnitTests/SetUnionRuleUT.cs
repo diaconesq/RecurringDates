@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class SetUnionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
+    public class SetUnionRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
 
         [TestCase(2015, 3, 31, true)]
@@ -20,7 +20,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
     }

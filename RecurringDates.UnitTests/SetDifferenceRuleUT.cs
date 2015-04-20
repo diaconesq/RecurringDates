@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class SetDifferenceRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
+    public class SetDifferenceRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
         [TestCase(2015, 4, 3, true)]
         [TestCase(2015, 4, 10, false)]
@@ -17,7 +17,7 @@ namespace RecurringDates.UnitTests
             var rule = DayOfWeek.Friday.EveryWeek()
                 .Except(new EveryDayRule().TheNthOccurenceInTheMonth(10))
                 ;
-            Project(rule).IsMatch(new DateTime(year, month, day))
+            Process(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
     }

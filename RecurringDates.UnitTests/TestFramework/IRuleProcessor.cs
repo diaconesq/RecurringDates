@@ -3,8 +3,8 @@
     /// <summary>
     /// Given a rule, return another rule.
     /// </summary>
-    public interface IRuleProjection
+    public interface IRuleProcessor
     {
-        IRule Project(IRule rule);
+        IRule Process(IRule rule);
     }
 }

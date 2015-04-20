@@ -2,9 +2,9 @@
 
 namespace RecurringDates.UnitTests.Serialization
 {
-    class SerializeDeserializeProjection : IRuleProjection
+    class SerializeDeserializeProcessor : IRuleProcessor
     {
-        public IRule Project(IRule rule)
+        public IRule Process(IRule rule)
         {
             var serializedString = new RuleSerializer().Serialize(rule);
             var deserializedRule = new RuleSerializer().Deserialize(serializedString);

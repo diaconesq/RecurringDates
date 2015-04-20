@@ -1,8 +1,8 @@
 namespace RecurringDates.UnitTests
 {
-    class IdentityProjection : IRuleProjection
+    class IdentityProcessor : IRuleProcessor
     {
-        public IRule Project(IRule rule)
+        public IRule Process(IRule rule)
         {
             return rule;
         }

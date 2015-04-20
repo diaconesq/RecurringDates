@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace RecurringDates.UnitTests
 {
     [TestFixture]
-    public class NthInMonthRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProjection, new()
+    public class NthInMonthRuleUT<T> : ProjectedRuleTestFixture<T> where T : IRuleProcessor, new()
     {
         [Test]
         public void NthIsZero_ThrowsException()
@@ -18,7 +18,7 @@ namespace RecurringDates.UnitTests
                 ReferencedRule = Substitute.For<IRule>()
             };
 
-            Action act = () => { Project(rule).IsMatch(new DateTime()); };
+            Action act = () => { Process(rule).IsMatch(new DateTime()); };
 
             act.ShouldThrow<Exception>();
         }
@@ -34,7 +34,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 31, true)]
@@ -47,7 +47,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 3, 31, false)]
@@ -60,7 +60,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
         [TestCase(2015, 4, 10, true)]
@@ -76,7 +76,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
 
@@ -94,7 +94,7 @@ namespace RecurringDates.UnitTests
 
             var date = new DateTime(year, month, day);
 
-            Project(rule).IsMatch(date).Should().Be(expected);
+            Process(rule).IsMatch(date).Should().Be(expected);
         }
 
     }
