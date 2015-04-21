@@ -22,5 +22,13 @@ namespace RecurringDates.UnitTests.Serialization
             rehydratedRule.Should().NotBeNull();
         }
 
+        [Test]
+        public void ANullRuleIsSerialized()
+        {
+            var result = RuleSerializer.Instance.Serialize(null);
+            var rule = RuleSerializer.Instance.Deserialize(result);
+            rule.Should().BeNull();
+        }
+
     }
 }
