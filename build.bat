@@ -13,15 +13,15 @@ if "%MsBuildExe%" == "" (
 )
 
 REM Package restore
-%NuGet% restore RecurringDates.sln -OutputDirectory "%cd%\packages" -NonInteractive
+"%NuGet%" restore RecurringDates.sln -OutputDirectory "%cd%\packages" -NonInteractive
 
 REM Build
-%MsBuildExe% RecurringDates.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+"%MsBuildExe%" RecurringDates.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 REM Dynamically restore the required test runner
-%NuGet% install NUnit.Runners -Version 2.6.4 -OutputDirectory packages
+"%NuGet%" install NUnit.Runners -Version 2.6.4 -OutputDirectory packages
 set NUnitExe="%cd%\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe"
 
 REM Test
 
-%NUnitExe% "%cd%\RecurringDates.UnitTests\bin\%config%\RecurringDates.UnitTests.dll"
+"%NUnitExe%" "%cd%\RecurringDates.UnitTests\bin\%config%\RecurringDates.UnitTests.dll"
