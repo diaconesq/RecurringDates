@@ -18,7 +18,7 @@ namespace RecurringDates.UnitTests
         public void Day_WithFluentSyntax_ShouldMatch_Monday()
         {
             var rule = DayOfWeek.Monday.EveryWeek();
-            var date = new DateTime(2015, 3, 9+1);
+            var date = new DateTime(2015, 3, 9);
 
             Process(rule).IsMatch(date).Should().BeTrue();
         }
