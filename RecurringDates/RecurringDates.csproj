@@ -54,6 +54,7 @@
     <Compile Include="NthInMonthRule.cs" />
     <Compile Include="BaseRule.cs" />
     <Compile Include="Helpers\NumberHelpers.cs" />
+    <Compile Include="Serialization\RuleTypeCache.cs" />
     <Compile Include="Serialization\SerializationHelpers.cs" />
     <Compile Include="SetDifferenceRule.cs" />
     <Compile Include="SetIntersectionRule.cs" />
