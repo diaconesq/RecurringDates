@@ -29,6 +29,35 @@ namespace RecurringDates.UnitTests.Serialization
             var rule = RuleSerializer.Instance.Deserialize(result);
             rule.Should().BeNull();
         }
+        [Test]
+        public void ACustomRuleIsSerialized_WhenSpecifyingItsAssembly()
+        {
+            var rule = new CustomRule();
+            var result = new RuleSerializer().Serialize(rule, rule.GetType().Assembly);
+            var deserializedRule = new RuleSerializer().Deserialize(result, rule.GetType().Assembly);
+            deserializedRule.Should().NotBeNull();
+        }
+        [Test]
+        public void ACustomRuleIsSerialized_WhenSpecifyingItsType()
+        {
+            var rule = new CustomRule();
+            var result = new RuleSerializer().Serialize(rule, rule.GetType());
+            var deserializedRule = new RuleSerializer().Deserialize(result, rule.GetType());
+            deserializedRule.Should().NotBeNull();
+        }
 
+    }
+
+    public class CustomRule : IRule
+    {
+        public bool IsMatch(DateTime day)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -108,11 +108,15 @@ namespace RecurringDates.Serialization
 
         private static readonly Assembly _ruleAssembly = typeof (IRule).Assembly;
 
-        private static ArrayList GetLoadList(object[] parameters)
+        private static object[] GetLoadList(object[] parameters)
         {
-            var list = new ArrayList(1 + parameters.Length);
-            list.Add(_ruleAssembly);
-            list.AddRange(parameters);
+            var list = new object[1 + parameters.Length];
+            list[0] = _ruleAssembly;
+            int crtPos = 1;
+            foreach (var assembly in parameters)
+            {
+                list[crtPos++] = assembly;
+            }
             return list;
         }
 
