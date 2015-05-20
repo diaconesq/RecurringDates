@@ -17,12 +17,12 @@ The main selling points of this library :
 The rules work at day/week/month level. There is (currently) no support for rule-based time-of-day (like "every three hours").
 
 ##Installing
+Get it from NuGet:  [![NuGet Status](http://img.shields.io/nuget/v/RecurringDates.svg?style=flat)](https://www.nuget.org/packages/RecurringDates/)
 
-You can get it [on Nuget: RecurringDates](https://www.nuget.org/packages/RecurringDates/). 
 
-Or, in Visual Studio, in the package manager GUI, search for package '`RecurringDates`'.  
+Or, in Visual Studio, in the NuGget package manager GUI, search for package '`RecurringDates`'.  
 
-Or install directly From the Nuget Package Manager console:
+Or install directly From the NuGet Package Manager console:
 
 ```
 PM> Install-Package RecurringDates
