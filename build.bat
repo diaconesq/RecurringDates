@@ -5,7 +5,7 @@ if "%config%" == "" (
 )
 
 if "%NuGet%" == "" (
-   set NuGet=nuget\nuget.exe
+   set NuGet=.nuget\nuget.exe
 )
 
 if "%MsBuildExe%" == "" (
