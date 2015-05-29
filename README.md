@@ -17,7 +17,7 @@ See the unit tests project for plenty of examples.
     var date = new DateTime(2015, 3, 9);
     everyMonday.IsMatch(date).Should().BeTrue();
     
-    var lastDayOfTheMonth = new NthInMonthRule { Nth = -1, ReferencedRule = new EveryDayRule()};
+    var lastDayOfTheMonth = new NthInMonthRule { Nth = -1, ReferencedRule = new EveryDayRule() };
     var date = new DateTime(2015, 2, 28);
     lastDayOfTheMonth.IsMatch(date).Should().BeTrue();
 
@@ -33,7 +33,7 @@ Get the 17th of the month if it's not a Sunday
 
 Start composing:
 
-    var notSundays = new NotRule{referencedRule = sundays};
+    var notSundays = new NotRule { ReferencedRule = sundays };
 
 Now let's put them together:
 
