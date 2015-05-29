@@ -1,5 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/g4svu8vmli7tfqp0?svg=true)](https://ci.appveyor.com/project/cristian-diaconescu/recurringdates) 
-[![diaconesq MyGet Build Status](https://www.myget.org/BuildSource/Badge/diaconesq?identifier=767fe9e9-01f3-4d50-92dc-f27300486d6d)](https://www.myget.org/)
+[![diaconesq MyGet Build Status](https://www.myget.org/BuildSource/Badge/diaconesq?identifier=767fe9e9-01f3-4d50-92dc-f27300486d6d)](https://www.myget.org/) 
+[![NuGet Status](http://img.shields.io/nuget/v/RecurringDates.svg?style=flat)](https://www.nuget.org/packages/RecurringDates/)
 
 # RecurringDates
 
@@ -89,7 +90,7 @@ Another example: get the first and last Sunday of the month:
     //persist it e.g. in a database; come back later and retrieve it:
     IRule deserializedRule = new RuleSerializer().Deserialize(serializedString);
 
-There are also helper methods for serializing your own custom rules. You just need to specify the assemblieswhere the rules live, or the actual types of the custom rules.
+There are also helper methods for serializing your own custom rules. You just need to specify the assemblies where the rules live, or the actual types of the custom rules.
 
 The rules work at day/week/month level. There is (currently) no support for rule-based time-of-day (like "every three hours").
 
