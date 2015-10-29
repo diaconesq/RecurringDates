@@ -25,6 +25,7 @@ namespace RecurringDates.Serialization
         {
             return assembly.DefinedTypes
                 .Where(t => typeof (IRule).IsAssignableFrom(t))
+                .Where(t => !t.IsInterface)
                 .ToList();
         }
 

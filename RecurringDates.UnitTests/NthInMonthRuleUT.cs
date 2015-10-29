@@ -96,5 +96,22 @@ namespace RecurringDates.UnitTests
             Process(rule).IsMatch(date).Should().Be(expected);
         }
 
+        [Test]
+        public void The31stOfFebruary_ShouldNeverMatch()
+        {
+            var rule = new NthInMonthRule()
+            {
+                Nth = 31,
+                ReferencedRule = new EveryDayRule()
+            }.InMonths(Month.Feb);
+
+            var dates = new DateTime(2015,2,28).UpTo(new DateTime(2015,3,5));
+            foreach (var date in dates)
+            {
+                Process(rule).IsMatch(date).Should().Be(false);
+            }
+
+        }
+
     }
 }

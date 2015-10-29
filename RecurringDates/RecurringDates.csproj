@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetweenDatesRule.cs" />
     <Compile Include="DayOfWeekRule.cs" />
     <Compile Include="DaysOfWeekRule.cs" />
     <Compile Include="EveryDayRule.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
+    <Compile Include="IEnumerableRule.cs" />
     <Compile Include="IRule.cs" />
     <Compile Include="Month.cs" />
     <Compile Include="MonthsRule.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="SetIntersectionRule.cs" />
     <Compile Include="SetUnionRule.cs" />
     <Compile Include="NthDayBeforeAfterRule.cs" />
+    <Compile Include="StartingAtDateRule.cs" />
     <Compile Include="UnaryRule.cs" />
     <Compile Include="WorkDayRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
