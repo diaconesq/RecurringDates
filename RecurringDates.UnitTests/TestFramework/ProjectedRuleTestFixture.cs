@@ -30,7 +30,7 @@ namespace RecurringDates.UnitTests
         }
 
 
-        public IRule Process(IRule rule)
+        public U Process<U>(U rule) where U : IRule
         {
             return _projection.Process(rule);
         }

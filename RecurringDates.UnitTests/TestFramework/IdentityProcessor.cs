@@ -2,7 +2,7 @@ namespace RecurringDates.UnitTests
 {
     class IdentityProcessor : IRuleProcessor
     {
-        public IRule Process(IRule rule)
+        public U Process<U>(U rule) where U : IRule
         {
             return rule;
         }

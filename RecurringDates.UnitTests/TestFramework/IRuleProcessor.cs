@@ -5,6 +5,6 @@
     /// </summary>
     public interface IRuleProcessor
     {
-        IRule Process(IRule rule);
+        U Process<U>(U rule) where U : IRule;
     }
 }
