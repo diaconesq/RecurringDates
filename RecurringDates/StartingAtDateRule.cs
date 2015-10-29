@@ -34,5 +34,10 @@ namespace RecurringDates
                     .Where(IsMatch);
             }
         }
+
+        public override string GetDescription()
+        {
+            return ReferencedRule.GetDescription() + string.Format(" starting on {0:d}", StartDate);
+        }
     }
 }

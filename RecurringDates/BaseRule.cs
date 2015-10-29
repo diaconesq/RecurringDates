@@ -16,6 +16,5 @@ namespace RecurringDates
         {
             return GetDescription();
         }
-
     }
 }
