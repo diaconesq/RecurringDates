@@ -24,4 +24,14 @@ namespace RecurringDates.UnitTests
         }
 
     }
+
+    [TestFixture]
+    public class TestXmasHolidays
+    {
+        [Test]
+        public void Test()
+        {
+            //var 
+        }
+    }
 }

@@ -8,18 +8,20 @@ namespace RecurringDates
     [DataContract]
     public class BetweenDatesRule : UnaryRule, IEnumerableRule
     {
-        private readonly DateTime _startDate;
-        private readonly DateTime _endDate;
+        [DataMember]
+        public DateTime StartDate { get; private set; }
+        [DataMember]
+        public DateTime EndDate { get; private set; }
 
         public BetweenDatesRule(DateTime startDate, DateTime endDate)
         {
-            _startDate = startDate;
-            _endDate = endDate;
+            StartDate = startDate;
+            EndDate = endDate;
         }
 
         public override bool IsMatch(DateTime day)
         {
-            return _startDate <= day.Date && day.Date <= _endDate
+            return StartDate <= day.Date && day.Date <= EndDate
                    && ReferencedRule.IsMatch(day);
 
         }
@@ -28,7 +30,7 @@ namespace RecurringDates
         {
             get
             {
-                return _startDate.UpTo(_endDate)
+                return StartDate.UpTo(EndDate)
                     .Where(IsMatch);
             }
         }

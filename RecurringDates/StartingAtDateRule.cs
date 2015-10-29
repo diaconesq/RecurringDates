@@ -8,16 +8,17 @@ namespace RecurringDates
     [DataContract]
     public class StartingAtDateRule : UnaryRule, IEnumerableRule
     {
-        private readonly DateTime _startDate;
+        [DataMember]
+        public DateTime StartDate { get; private set; }
 
         internal StartingAtDateRule(DateTime startDate)
         {
-            _startDate = startDate.Date;
+            StartDate = startDate.Date;
         }
 
         public override bool IsMatch(DateTime day)
         {
-            return day >= _startDate && ReferencedRule.IsMatch(day);
+            return day >= StartDate && ReferencedRule.IsMatch(day);
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace RecurringDates
         {
             get
             {
-                return _startDate.DaysAfterIncludingSelf()
+                return StartDate.DaysAfterIncludingSelf()
                     .Where(IsMatch);
             }
         }

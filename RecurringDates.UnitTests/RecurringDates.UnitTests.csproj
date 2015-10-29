@@ -54,10 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetweenDatesRuleUT.cs" />
     <Compile Include="DayOfWeekRuleUT.cs" />
     <Compile Include="Helpers\NumberHelpersUT.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Serialization\SerializeDeserializeProcessor.cs" />
+    <Compile Include="StartingAtDateRuleUT.cs" />
     <Compile Include="TestFramework\IdentityProcessor.cs" />
     <Compile Include="TestFramework\IRuleProcessor.cs" />
     <Compile Include="MonthUT.cs" />
