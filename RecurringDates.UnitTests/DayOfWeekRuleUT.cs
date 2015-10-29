@@ -22,16 +22,5 @@ namespace RecurringDates.UnitTests
 
             Process(rule).IsMatch(date).Should().BeTrue();
         }
-
-    }
-
-    [TestFixture]
-    public class TestXmasHolidays
-    {
-        [Test]
-        public void Test()
-        {
-            //var 
-        }
     }
 }
