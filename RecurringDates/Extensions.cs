@@ -10,10 +10,21 @@ namespace RecurringDates
         {
             return new SetUnionRule {Rules = new[] {first}.Concat(otherRules)};
         }
+        public static SetUnionRule MatchAny(this IEnumerable<IRule> rules)
+        {
+            if (rules == null) throw new ArgumentNullException("rules");
+            return new SetUnionRule { Rules = rules };
+        }
 
         public static SetIntersectionRule IfAlso(this IRule first, params IRule[] otherRules)
         {
             return new SetIntersectionRule {Rules = new[] {first}.Concat(otherRules)};
+        }
+
+        public static SetIntersectionRule MatchAll(this IEnumerable<IRule> rules)
+        {
+            if (rules == null) throw new ArgumentNullException("rules");
+            return new SetIntersectionRule { Rules = rules };
         }
 
         public static SetDifferenceRule Except(this IRule includeRule, IRule excludeRule)
