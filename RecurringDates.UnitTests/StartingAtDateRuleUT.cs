@@ -24,7 +24,8 @@ namespace RecurringDates.UnitTests
         {
             var rule = DayOfWeek.Wednesday.EveryWeek().Starting(new DateTime(2015, 10, 28));
 
-            Process(rule).IsMatch(new DateTime(2015, 10, 21)).Should().BeFalse();
+            Process(rule).IsMatch(new DateTime(2015, 10, 21))
+                .Should().BeFalse();
         }
 
     }

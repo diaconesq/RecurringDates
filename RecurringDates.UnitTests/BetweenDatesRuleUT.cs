@@ -19,6 +19,7 @@ namespace RecurringDates.UnitTests
                 new DateTime(2015, 11, 11)
                 );
         }
+
         [Test]
         public void DateBeforeStart_DoesNotMatch()
         {
@@ -34,6 +35,5 @@ namespace RecurringDates.UnitTests
 
             Process(rule).IsMatch(new DateTime(2015, 11, 18)).Should().BeFalse();
         }
-
     }
 }
