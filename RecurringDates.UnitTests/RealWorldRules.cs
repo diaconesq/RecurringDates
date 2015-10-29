@@ -225,5 +225,46 @@ namespace RecurringDates.UnitTests
             Process(rule).IsMatch(new DateTime(year, month, day))
                 .Should().Be(expected);
         }
+
+
+        [Test]
+        public void SkipXmasHolidays()
+        {
+            var holidayDays = new IRule[]
+            {
+                Month.Dec.Day(22),
+                Month.Dec.Day(23),
+                Month.Dec.Day(24),
+                Month.Dec.Day(25),
+                Month.Dec.Day(26),
+                Month.Dec.Day(31),
+
+                Month.Jan.Day(1),
+                Month.Jan.Day(2),
+            }.MatchAny();
+
+            var weekDaysExceptHolidays = new WorkDayRule().Except(holidayDays);
+
+            var startDate = new DateTime(2015, 12, 20);
+            var endDate = new DateTime(2016, 1, 5);
+
+            var boundedRule = weekDaysExceptHolidays.Between(startDate, endDate);
+
+            var actualMatchingDays = boundedRule.MatchingDates;
+
+            actualMatchingDays.Should().BeEquivalentTo(
+                //Dec 20 is a sunday
+                new DateTime(2015, 12, 21),
+                //dec 22-26 are holidays
+                //dec 27 is a sunday
+                new DateTime(2015, 12, 28),
+                new DateTime(2015, 12, 29),
+                new DateTime(2015, 12, 30),
+                //dec 31 - jan 2 are holidays
+                //jan 3 is a sunday
+                new DateTime(2016, 1, 4),
+                new DateTime(2016, 1, 5)
+                );
+        }
     }
 }
