@@ -115,7 +115,7 @@ namespace RecurringDates
 
             while (true)
             {
-                crtDate += TimeSpan.FromDays(N);
+                crtDate = crtDate.AddDays(N);
                 yield return crtDate;
             }
         }
