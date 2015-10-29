@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetweenDatesRuleUT.cs" />
+    <Compile Include="DayInMonthRuleUT.cs" />
     <Compile Include="DayOfWeekRuleUT.cs" />
     <Compile Include="Helpers\NumberHelpersUT.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />

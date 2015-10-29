@@ -98,6 +98,11 @@ namespace RecurringDates
         {
             return new BetweenDatesRule(startDate, endDate) {ReferencedRule = rule};
         }
+
+        public static IRule Day(this Month month, int day)
+        {
+            return new DayInMonthRule(day, month);
+        }
     }
     
     public static class DateTimeExtensions 

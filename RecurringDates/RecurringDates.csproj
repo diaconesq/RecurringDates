@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetweenDatesRule.cs" />
+    <Compile Include="DayInMonthRule.cs" />
     <Compile Include="DayOfWeekRule.cs" />
     <Compile Include="DaysOfWeekRule.cs" />
     <Compile Include="EveryDayRule.cs" />
