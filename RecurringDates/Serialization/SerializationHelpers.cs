@@ -37,9 +37,13 @@ namespace RecurringDates.Serialization
         /// <returns></returns>
         public IRule Deserialize(string serialized)
         {
-            return DeserializeInternal(serialized, _ruleAssembly);
+            return DeserializeInternal<IRule>(serialized, _ruleAssembly);
         }
 
+        public U Deserialize<U>(string serialized) where U: IRule
+        {
+            return DeserializeInternal<U>(serialized, _ruleAssembly);
+        }
 
         /// <summary>
         /// Dehydrate a rule to a string. The rule should only use types defined in this assembly.
@@ -123,28 +127,28 @@ namespace RecurringDates.Serialization
         public IRule Deserialize(string serialized, params Assembly[] ruleTypesAssemblies)
         {
             // ReSharper disable once CoVariantArrayConversion
-            return DeserializeInternal(serialized, GetLoadList(ruleTypesAssemblies));
+            return DeserializeInternal<IRule>(serialized, GetLoadList(ruleTypesAssemblies));
         }
 
         public IRule Deserialize(string serialized, params Type[] ruleTypesAssemblies)
         {
             // ReSharper disable once CoVariantArrayConversion
-            return DeserializeInternal(serialized, GetLoadList(ruleTypesAssemblies));
+            return DeserializeInternal<IRule>(serialized, GetLoadList(ruleTypesAssemblies));
         }
 
         public IRule Deserialize(string serialized, params object[] ruleTypesAssemblies)
         {
-            return DeserializeInternal(serialized, GetLoadList(ruleTypesAssemblies));
+            return DeserializeInternal<IRule>(serialized, GetLoadList(ruleTypesAssemblies));
         }
 
-        private IRule DeserializeInternal(string serialized, params object[] ruleTypesAssemblies)
+        private U DeserializeInternal<U>(string serialized, params object[] ruleTypesAssemblies) where U: IRule
         {
             var serializer = GetSerializer(ruleTypesAssemblies);
 
             var xmlReader = XmlReader.Create(new StringReader(serialized));
             var obj = serializer.ReadObject(xmlReader);
 
-            return (IRule)obj;
+            return (U)obj;
         }
 
         private DataContractSerializer GetSerializer(object[] ruleTypesAssemblies)

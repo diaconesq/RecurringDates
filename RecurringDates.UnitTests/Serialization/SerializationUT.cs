@@ -45,7 +45,14 @@ namespace RecurringDates.UnitTests.Serialization
             var deserializedRule = new RuleSerializer().Deserialize(result, rule.GetType());
             deserializedRule.Should().NotBeNull();
         }
-
+        [Test]
+        public void AnIEnumerableRuleIsDeserializedAsIRule()
+        {
+            var rule = new EveryDayRule().Starting(new DateTime(2015, 1, 1));
+            var result = RuleSerializer.Instance.Serialize(rule);
+            var hydratedRule = RuleSerializer.Instance.Deserialize(result);
+            hydratedRule.Should().BeAssignableTo<IEnumerableRule>();
+        }
     }
 
     public class CustomRule : IRule
